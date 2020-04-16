@@ -70,7 +70,7 @@
         .links{
             color:white; 
         }
-        .messages {
+        #messages {
             text-align: center;
             color: rgb(15, 240, 195); 
             margin-top: 10px;
@@ -85,23 +85,7 @@
 
     {% endblock %}
 
-    <hr>
-    <footer>
-        <p>footer</p>
-    </footer>
-
-    <script>
-		var form_fields = document.getElementsByTagName('input')
-		form_fields[1].placeholder='Username..';
-		form_fields[2].placeholder='Email..';
-		form_fields[3].placeholder='Enter password...';
-		form_fields[4].placeholder='Re-enter Password...';
-
-
-		for (var field in form_fields){	
-			form_fields[field].className += ' form-control'
-		}
-	</script>
+   
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
