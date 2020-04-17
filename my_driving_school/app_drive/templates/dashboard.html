@@ -1,11 +1,16 @@
 {% extends "main/main.html" %}
 
+{% block title %} Drive school | Dashoard {% endblock %}
 {% block content %}
 
+<style>
+    .btn{
+        color:white !important; 
+    }
+</style>
 <div class="p-5">
     <h1 class="mb-5">My Dashboard</h1>
   
-
     <div class="row">
         <div class="col-md-3">
             <div class="card mb-3">
@@ -32,11 +37,12 @@
                 <a href="#" class="card-link">Another link</a>
                 </div>
             </div>
-
         </div>
 
         <div class="col-md-9">
             <h2 class="mt-5">My RDV</h2>
+
+            <a class="btn btn-primary mt-5 mb-5" href="{% url 'addRdv' %}">Add RDV with student</a>
 
             <table class="table table-hover">
                 <thead>
@@ -47,6 +53,8 @@
                         <th scope="row">Hour end</th>
                         <th scope="row">Name instructor</th>
                         <th scope="row">Name Student</th>
+                        <th scope="row">Update</th>
+                        <th scope="row">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,6 +77,14 @@
                         </td>
                         <td>
                             {{r.student}}
+                        </td>
+
+                        <td>
+                            <a class="btn btn-warning" href="">Update</a>
+                        </td>
+
+                        <td>
+                            <a class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}

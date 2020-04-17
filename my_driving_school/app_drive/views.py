@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import CreateUserForm
+from .forms import CreateUserForm, CreateRDVForm
 from .decorators import unauthenticated_user, allowed_users
 from app_drive.models import *
 
@@ -75,9 +75,19 @@ def instructorProfile(request):
 
 def dashboard(request):
     current_user =request.user.id
-
     user = User.objects.get(id=current_user)
     instructorId = user.instructor.id 
     UserRdv = RdvDrive.objects.filter(instructor_id=instructorId) 
 
     return render(request, 'dashboard.html',{'user':user,'userRdv': UserRdv})
+
+def addRdv(request):
+    form = CreateRDVForm()
+
+    if request.method =='POST':
+        form = CreateRDVForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
+    return render(request, 'forms/newRdv.html', context)

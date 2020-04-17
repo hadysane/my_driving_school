@@ -1,0 +1,38 @@
+{% extends "main/main.html" %}
+
+{% block title %} Drive school | Add RDV {% endblock %}
+
+{% block content %}
+
+<div class="p-5">
+    <form action="POST" action="">
+        {% csrf_token %}
+
+        {{form.place.label}}
+        {{form.place}}
+
+        {{form.date.label}}
+        {{form.date}}
+
+        {{form.start_time.label}}
+        {{form.start_time }}
+
+        {{form.end_time.label}}
+        {{form.end_time }}
+
+        {{form.nb_hour.label}}
+        {{form.nb_hour }}
+
+        {{form.student.label}}
+        {{form.student }}
+
+        {{form.instructor.label}}
+        {{form.instructor }}
+        
+        <div class="mt-3">
+            <input class="btn btn-success" type="submit" value="new Rdv">
+        </div>
+    </form>
+   
+</div>
+{% endblock %}
