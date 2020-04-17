@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CreateUserForm
 from .decorators import unauthenticated_user, allowed_users
+from app_drive.models import *
 
 def home(request):
     return render(request, 'index.html')
@@ -37,28 +38,46 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            return redirect('dashboard')
+            return redirect('home')
         else:
             messages.info(request,'Username OR password is incorrect')
-
-    context = {}
-    return render(request, 'users/login.html', context)
+    return render(request, 'users/login.html')
 
 def logoutUser(request):
     logout(request) 
     return redirect('login')
-@login_required(login_url='login')
 
-
-def dashboard(request):
-    return render(request, 'dashboard.html')
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Student'])
 def studentProfile(request):
-    return render(request, 'student/account.html')
+    current_user =request.user.id
+
+    user = User.objects.get(id=current_user)
+    studentId= user.student.id 
+    # instructor = user.instructor.id 
+    UserRdv = RdvDrive.objects.filter(student_id=studentId)
+
+    return render(request, 'student/account.html',{'user':user,'userRdv': UserRdv})
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Instructor'])
+
 def instructorProfile(request): 
-    return render(request, 'instructor/account.html')
+    current_user =request.user.id
+    user = User.objects.get(id=current_user)
+    students = user.instructor.students.all() 
+    return render(request, 'instructor/account.html',{'user': user, 'students': students})
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Instructor'])
+
+def dashboard(request):
+    current_user =request.user.id
+
+    user = User.objects.get(id=current_user)
+    instructorId = user.instructor.id 
+    UserRdv = RdvDrive.objects.filter(instructor_id=instructorId) 
+
+    return render(request, 'dashboard.html',{'user':user,'userRdv': UserRdv})

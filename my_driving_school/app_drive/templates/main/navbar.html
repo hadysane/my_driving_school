@@ -26,9 +26,19 @@
           <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
         </li>
         {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-        </li>
+        
+        {% for group in user.groups.all %}
+          {% if group.name == 'Instructor'  %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profil_instructor' %}">Instructor</a>
+            </li>
+          {% endif %}
+       {% endfor %}
+
         {% for group in user.groups.all %}
           {% if group.name == 'Student'  %}
             <li class="nav-item">
@@ -37,14 +47,7 @@
           {% endif %}
         {% endfor %}
 
-        {% for group in user.groups.all %}
-          {% if group.name == 'Instructor'  %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'profil_instructor' %}">Instructor</a>
-            </li>
-          {% endif %}
-        {% endfor %}
-
+       
         {% endif %}
         {% if user.is_anonymous %}
         <li class="nav-item">

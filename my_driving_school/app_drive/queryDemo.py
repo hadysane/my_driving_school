@@ -8,16 +8,18 @@ rdvDrives = RdvDrive.objects.all()
 instructors = Instructor.objects.all()
 
 ## student toto
-studentUser = User.objects.get(id=7)
-
 ## studentUser.student = toto tata
 ## studentUser.student.age = 18 10 1995
 ## studentUser.student.nb_hour_lesson
 ##studentUser.instructor.id = 7
+studentUser = User.objects.get(id=7)
+
+
 
 ## instructor philip iduser
-instructorUser = User.objects.get(id=8)
 ## studentUser.instructor.id = 3
+instructorUser = User.objects.get(id=8)
+
 
 
 
